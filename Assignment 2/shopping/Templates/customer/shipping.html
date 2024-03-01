@@ -1,0 +1,122 @@
+{% extends 'customer/common/layout.html' %}
+{% load static %}
+{% block content %}
+<!-- breadcrumbs -->
+<div class="breadcrumbs">
+    <div class="container">
+        <ol class="breadcrumb breadcrumb1 animated wow slideInLeft" data-wow-delay=".5s">
+            <li><a href="/customer/home/"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>Home</a></li>
+            <li class="active">Shipping Information</li>
+        </ol>
+    </div>
+</div>
+<!-- //breadcrumbs -->
+<div class="row">
+    <div class="col">
+        <div id="accordion">
+            <div class="card">
+              <div class="card-header" id="headingOne">
+                <h5 class="mb-0">
+                  <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    Collapsible Group Item #1
+                  </button>
+                </h5>
+              </div>
+          
+              <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                <div class="card-body">
+                  Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header" id="headingTwo">
+                <h5 class="mb-0">
+                  <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    Collapsible Group Item #2
+                  </button>
+                </h5>
+              </div>
+              <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                <div class="card-body">
+                  Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header" id="headingThree">
+                <h5 class="mb-0">
+                  <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                    Collapsible Group Item #3
+                  </button>
+                </h5>
+              </div>
+              <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                <div class="card-body">
+                  Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                </div>
+              </div>
+            </div>
+          </div>
+    </div>
+</div>
+
+<!-- register -->
+<div class="register">
+    <div class="container">
+        <h2>Shipping details</h2>
+        <div class="login-form-grids">
+            <h5>profile information</h5>
+            <form action="/customer/store_shipping/" method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <input type="text" placeholder="First Name" name="fname" id="fname" required=" ">
+                </div>
+                <div class="form-group">
+                    <input type="text" placeholder="Last Name" name="lname" id="lname" required=" ">
+                </div>
+                <div class="form-group">
+                    <input type="email" placeholder="info@example.com" name="email" id="email" required=" ">
+                </div>
+                <div class="form-group">
+                    <input type="text" placeholder="10 digits phone number" name="contact" id="contact" required=" "
+                        pattern="[6-9][0-9]{9}">
+                </div>
+                <div class="form-group">
+                    <select class="form-control" name="state" id="state" required="">
+                        <option value="">----------------------------select state-------------------------------
+                        </option>
+                        {% for s in states %}
+                        <option value="{{s.id}}">{{s.state}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <select class="form-control" name="city" id="city" required="">
+                        <option value="">----------------------------select city---------------------------------
+                        </option>
+                        {% for c in cities %}
+                        <option value="{{c.id}}">{{c.city}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="mb-3 form-group">
+                    <textarea class="form-control" name="address" id="address" rows="3" placeholder="Enter Address"
+                        required=""></textarea>
+                </div>
+                <input type="submit" value="Proceed">
+            </form>
+        </div>
+        {%for message in messages%}
+        {%if message.tags == 'error'%}
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        <script>
+            var m = "{{message}}"
+            swal("Denied!", m, "error")
+        </script>
+        {%endif%}
+        {%endfor%}
+    </div>
+</div>
+<!-- //register -->
+{% endblock %}

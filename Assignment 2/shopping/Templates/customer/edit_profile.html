@@ -1,0 +1,82 @@
+{% extends 'customer/common/layout.html' %}
+{% load static %}
+{% block content %}
+<!-- breadcrumbs -->
+<div class="breadcrumbs">
+    <div class="container">
+        <ol class="breadcrumb breadcrumb1 animated wow slideInLeft" data-wow-delay=".5s">
+            <li><a href="/customer/home/"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>Home</a></li>
+            <li class="active">My Profile</li>
+        </ol>
+    </div>
+</div>
+<!-- //breadcrumbs -->
+<!-- register -->
+<div class="register">
+    <div class="container">
+        <h2>Edit Profile</h2>
+        <div class="login-form-grids">
+            <h5>profile information</h5>
+            <form action="/customer/update_profile/{{result.registeration.id}}" method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <input type="text" placeholder="First Name" name="fname" id="fname" required=" " value="{{result.user.first_name}}">
+                </div>
+                <div class="form-group">
+                    <input type="text" placeholder="Last Name" name="lname" id="lname" required=" " value="{{result.user.last_name}}">
+                </div>
+                <div class="form-group">
+                    <input type="email" placeholder="info@example.com" name="email" id="email" required=" " value="{{result.user.email}}">
+                </div>
+                <div class="form-group">
+                    <input type="text" placeholder="10 digits phone number" name="contact" id="contact" required=" "
+                        pattern="[6-9][0-9]{9}" value="{{result.contact}}">
+                </div>
+                <div class="form-group">
+                    <select class="form-control" name="state" id="state" required="">
+                        <option value="">----------------------------select state-------------------------------
+                        </option>
+                        {% for s in states %}
+                        <option value="{{s.id}}" {%if result.state_id == s.id %}selected{%endif%}>{{s.state}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <select class="form-control" name="city" id="city" required="">
+                        <option value="">----------------------------select city---------------------------------
+                        </option>
+                        {% for c in cities %}
+                        <option value="{{c.id}}" {%if result.city_id == c.id %}selected{%endif%}>{{c.city}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="mb-3 form-group">
+                    <textarea class="form-control" name="address" id="address" rows="3" placeholder="Enter Address"
+                        required="">{{result.address}}</textarea>
+                </div>
+                <div class="form-group">
+                    <input type="text" placeholder="Username" name="username" id="username" required=" " value="{{result.user.username}}">
+                </div>
+                <div class="form-group">
+                    <input type="password" placeholder="Password" name="password" id="password" required=" " value="{{result.user.password}}">
+                </div>
+                <input type="submit" value="Update">
+            </form>
+        </div>
+        {%for message in messages%}
+        {%if message.tags == 'error'%}
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        <script>
+            var m = "{{message}}"
+            swal("Denied!", m, "error")
+        </script>
+        {%endif%}
+        {%endfor%}
+        <div class="register-home">
+            <a href="/customer/login/">Login</a>
+            <a href="/customer/home/">Home</a>
+        </div>
+    </div>
+</div>
+<!-- //register -->
+{% endblock %}

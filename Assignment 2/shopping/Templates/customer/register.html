@@ -1,0 +1,85 @@
+{% extends 'customer/common/layout.html' %}
+{% load static %}
+{% block content %}
+<!-- breadcrumbs -->
+<div class="breadcrumbs">
+    <div class="container">
+        <ol class="breadcrumb breadcrumb1 animated wow slideInLeft" data-wow-delay=".5s">
+            <li><a href="/customer/home/"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>Home</a></li>
+            <li class="active">Register User</li>
+        </ol>
+    </div>
+</div>
+<!-- //breadcrumbs -->
+<!-- register -->
+<div class="register">
+    <div class="container">
+        <h2>Register User</h2>
+        <div class="login-form-grids">
+            <h5>profile information</h5>
+            <form action="/customer/store_register/" method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <input type="text" placeholder="First Name" name="fname" id="fname" required=" ">
+                </div>
+                <div class="form-group">
+                    <input type="text" placeholder="Last Name" name="lname" id="lname" required=" ">
+                </div>
+                <div class="form-group">
+                    <input type="email" placeholder="info@example.com" name="email" id="email" required=" ">
+                </div>
+                <div class="form-group">
+                    <input type="text" placeholder="10 digits phone number" name="contact" id="contact" required=" "
+                        pattern="[6-9][0-9]{9}">
+                </div>
+                <div class="form-group">
+                    <select class="form-control" name="state" id="state" required="">
+                        <option value="">----------------------------select state-------------------------------
+                        </option>
+                        {% for s in states %}
+                        <option value="{{s.id}}">{{s.state}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <select class="form-control" name="city" id="city" required="">
+                        <option value="">----------------------------select city---------------------------------
+                        </option>
+                        {% for c in cities %}
+                        <option value="{{c.id}}">{{c.city}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="mb-3 form-group">
+                    <textarea class="form-control" name="address" id="address" rows="3" placeholder="Enter Address"
+                        required=""></textarea>
+                </div>
+                <div class="form-group">
+                    <input type="text" placeholder="Username" name="username" id="username" required=" ">
+                </div>
+                <div class="form-group">
+                    <input type="password" placeholder="Password" name="password" id="password" required=" ">
+                </div>
+                <div class="form-group">
+                    <input type="password" placeholder="Confirm Password" name="cpassword" id="cpassword" required=" ">
+                </div>
+                <input type="submit" value="Register">
+            </form>
+        </div>
+        {%for message in messages%}
+        {%if message.tags == 'error'%}
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        <script>
+            var m = "{{message}}"
+            swal("Denied!", m, "error")
+        </script>
+        {%endif%}
+        {%endfor%}
+        <div class="register-home">
+            <a href="/customer/login/">Login</a>
+            <a href="/customer/home/">Home</a>
+        </div>
+    </div>
+</div>
+<!-- //register -->
+{% endblock %}

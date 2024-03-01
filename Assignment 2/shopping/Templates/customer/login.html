@@ -1,0 +1,42 @@
+{% extends 'customer/common/layout.html' %}
+{% load static %}
+{% block content %}
+<!-- breadcrumbs -->
+<div class="breadcrumbs">
+	<div class="container">
+		<ol class="breadcrumb breadcrumb1 animated wow slideInLeft" data-wow-delay=".5s">
+			<li><a href="/customer/home/"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>Home</a></li>
+			<li class="active">Login User</li>
+		</ol>
+	</div>
+</div>
+<!-- //breadcrumbs -->
+<!-- login -->
+<div class="login">
+	<div class="container">
+		<h2>Login User</h2>
+
+		<div class="login-form-grids animated wow slideInUp" data-wow-delay=".5s">
+			<form action="/customer/login_check/" method="post">
+				{% csrf_token %}
+				<input type="text" placeholder="Username" name="username" id="username" required=" ">
+				<input type="password" placeholder="Password" name="password" id="password" required=" ">
+				<input type="submit" name="submit" id="submit" value="Login">
+			</form>
+		</div>
+		{%for message in messages%}
+		{%if message.tags == 'error'%}
+		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+		<script>
+			var m = "{{message}}"
+			swal("Denied!", m, "error")
+		</script>
+		{%endif%}
+		{%endfor%}
+		<h4>For New People</h4>
+		<p><a href="/customer/register/">Register Here</a> (Or) go back to <a href="/customer/home/">Home<span
+					class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></a></p>
+	</div>
+</div>
+<!-- //login -->
+{% endblock %}

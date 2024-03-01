@@ -1,0 +1,123 @@
+{%extends 'seller/common/layout.html'%}
+{%block content%}
+
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="title">
+                            <h4>Form</h4>
+                        </div>
+                        <nav aria-label="breadcrumb" role="navigation">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="/myadmin/dashboard_shopping/">Home</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Form Basic</li>
+                            </ol>
+                        </nav>
+                    </div>
+                   
+                </div>
+            </div>
+            <!-- Default Basic Forms Start -->
+            <div class="pd-20 card-box mb-30">
+                <div class="clearfix">
+                    <div class="pull-left">
+                        <h4 class="text-blue h4"> Product</h4>
+                        <p class="mb-30">Edit Product</p>
+                    </div>
+                    
+                </div>
+                <form method="post" action="/myadmin/update_product_shopping/{{result.id}}" enctype="multipart/form-data">
+                    {%csrf_token%}
+                    <div class="form-group row">
+                        <!-- <label class="col-sm-12 col-md-2 col-form-label">Product Name</label> -->
+                        <div class="col-sm-12 col-md-10">
+                            <input class="form-control" required type="text" placeholder="Product Name" name="pname" id="pname" value="{{result.pname}}">
+                        </div>
+                       
+                    </div>
+
+                    <div class="form-group row">
+                        <!-- <label class="col-sm-12 col-md-2 col-form-label">Price</label> -->
+                        <div class="col-sm-12 col-md-10">
+                            <input class="form-control" type="tel" required placeholder="Product Price" name="price" id="price" value="{{reuslt.price}}">
+                        </div>
+                       
+                    </div>
+
+
+                    <div class="form-group row">
+                        <!-- <label for="col-sm-12 col-md-2 col-form-label">Example textarea</label> -->
+                        <div class="col-sm-12 col-md-10">
+                            <!-- <textarea class="form-control" id="exampleFormControlTextarea1" rows="2" cols="20"></textarea> -->
+                            <input class="form-control form-control-lg" required type="text" placeholder=" Small Description" name="sdesc" id="sdesc" rows="5" value="{{result.sdesc}}">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <!-- <label for="col-sm-12 col-md-2 col-form-label">Example textarea</label> -->
+                        <div class="col-sm-12 col-md-10">
+                            <textarea class="form-control" id="ldesc" required name="ldesc" placeholder="Large Description">{{result.ldesc}}</textarea>
+                            <!-- <input class="form-control form-control-lg" type="text" placeholder=" Small Description" name="sdesc" id="sdesc" rows="5"> -->
+                        </div>
+                    </div>
+
+                
+                    <div class="form-group row">
+                        <!-- <label class="col-sm-12 col-md-2 col-form-label">Category</label> -->
+                        <div class="col-sm-12 col-md-10">
+                            <select class="custom-select col-12" required name="category" id="category">
+                                <option selected="">--Select Category--</option>
+                                {%for c in categories%}
+                                <option value="{{c.id}} "{% if result.category_id == c.id %}selected{%endif%}>{{c.category}}</option>
+                                {%endfor%}
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <!-- <label class="col-sm-12 col-md-2 col-form-label">SubCategory</label> -->
+                        <div class="col-sm-12 col-md-10">
+                            <select class="custom-select col-12" required name="subcategory" id="subcategory">
+                                <option selected="">--Select SubCategory--</option>
+                                {%for sc in subcategories%}
+                                <option value="{{sc.id}}"{% if result.subcategory_id == sc.id %}selected{%endif%}>{{sc.subcategory}}</option>
+                                {%endfor%}
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <!-- <label>Image</label> -->
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" required  name="image" id="image" value="{{result.file_name}}">
+                            <label class="custom-file-label">{{result.file_name}}</label>
+                            <!-- <img src="/media/upload/{{result.file_name}}" class="img-fluid img-thumbnail" width="150px"> -->
+                        </div>
+                    </div>
+
+
+
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                        
+                        <!-- <div class="col-sm-12 col-md-10"> -->
+                           <!-- <input type="button" value="Submit" class="btn btn-primary">  -->
+                        <!-- </div> -->
+                    
+                    
+            </div>
+
+            {%for message in messages%}
+        {%if message.tags == 'error'%}
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script> -->
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        <script>
+            var m = "{{message}}"
+            swal("Denied!",m,"error")
+        </script>
+        {%endif%}
+{%endfor%}
+            {%endblock%}
+        </div>
+    </div>

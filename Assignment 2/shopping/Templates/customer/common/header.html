@@ -1,0 +1,184 @@
+{% load static %}
+<!-- header -->
+<div class="agileits_header">
+    <div class="container">
+        <div class="agile-login">
+            <ul>
+                <li><a href="/customer/edit_profile/{{result.registeration.id}}"> {{result.username}} </a></li>
+                <li><a href="/customer/register/"> Create Account </a></li>
+                <li><a href="/customer/login/">Login</a></li>
+                <li><a href="/customer/logout/">Logout</a></li>
+                
+            </ul>
+        </div>
+        <div class="product_list_header">
+            <form action="#" method="post" class="last">
+                <input type="hidden" name="cmd" value="_cart">
+                <input type="hidden" name="display" value="1">
+                <button class="w3view-cart" type="submit" name="submit" value=""><i class="fa fa-cart-arrow-down"
+                        aria-hidden="true"></i></button>
+            </form>
+        </div>
+        <div class="clearfix"> </div>
+    </div>
+</div>
+
+<div class="logo_products">
+    <div class="container">
+        <div class="w3ls_logo_products_left1">
+            <ul class="phone_email">
+                <li><i class="fa fa-phone" aria-hidden="true"></i>Order online or call us : (+91) 88495 08151</li>
+
+            </ul>
+        </div>
+        <div class="w3ls_logo_products_left">
+            <h1><a href="/customer/home/">Elite Shopping</a></h1>
+        </div>
+        <div class="w3l_search">
+            <form action="#" method="post">
+                <input type="search" name="Search" placeholder="Search for a Product..." required="">
+                <button type="submit" class="btn btn-default search" aria-label="Left Align">
+                    <i class="fa fa-search" aria-hidden="true"> </i>
+                </button>
+                <div class="clearfix"></div>
+            </form>
+        </div>
+
+        <div class="clearfix"> </div>
+    </div>
+</div>
+<!-- //header -->
+<!-- navigation -->
+<div class="navigation-agileits">
+    <div class="container">
+        <nav class="navbar navbar-default">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header nav_2">
+                <button type="button" class="navbar-toggle collapsed navbar-toggle1" data-toggle="collapse"
+                    data-target="#bs-megadropdown-tabs">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="/customer/home/" class="act">Home</a></li>
+                    <!-- Mega Menu -->
+                    {%for cat in categories%}
+                    <li class="dropdown">
+                        
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="text-transform: capatilize;">{{cat.category}}<b class="caret"></b></a>
+                    
+                         <ul class="dropdown-menu multi-column columns-3">
+                            <div class="row">
+                                <div class="multi-gd-img">
+
+                                    <ul class="multi-column-dropdown">
+                                        <h6>All {{cat.category}}</h6>
+                                        
+                                        {%for sub in subcategories%}
+                                            
+                                        <li><a href="{% if sub.category_id == cat.id %}/customer/products/{{sub.id}} {% endif %}">{% if sub.category_id == cat.id %} {{sub.subcategory}}{% endif %}</a></li>
+                                            
+                                        {%endfor%} 
+                                    </ul>
+                                </div>
+
+                            </div>
+                        </ul>
+                    </li> 
+                    {%endfor%}
+                    
+                    
+                    <!-- <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Clothing<b class="caret"></b></a>
+                        <ul class="dropdown-menu multi-column columns-3">
+                            <div class="row">
+                                <div class="multi-gd-img">
+                                    <ul class="multi-column-dropdown">
+                                        <h6>All Clothing</h6>
+                                        <li><a href="/customer/clothing/">Mens</a></li>
+                                        <li><a href="/customer/clothing/">Womens</a></li>
+                                        <li><a href="/customer/clothing/">Kids</a></li>
+                                        <li><a href="/customer/clothing/">Fashion accessories</a></li>
+                                        <li><a href="/customer/clothing/">Jewellery</a></li>
+                                        <li><a href="/customer/clothing/">Watches/Wallet/Purse</a></li>
+                                    </ul>
+                                </div>
+
+
+                            </div>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Baby & Kids<b class="caret"></b></a>
+                        <ul class="dropdown-menu multi-column columns-3">
+                            <div class="row">
+                                <div class="multi-gd-img">
+                                    <ul class="multi-column-dropdown">
+                                        <h6>Baby and Kids</h6>
+                                        <li><a href="/customer/babyandkids/">Baby Products</a></li>
+                                        <li><a href="/customer/babyandkids/">Toys & Games</a></li>
+                                        <li><a href="/customer/babyandkids/">Baby Clothing/Shoes</a></li>
+                                        <li><a href="/customer/babyandkids/">Prams</a></li>
+                                        <li><a href="/customer/babyandkids/">Kids School Bags</a></li>
+                                        <li><a href="/customer/babyandkids/">Stationary Products</a></li>
+                                    </ul>
+                                </div>
+
+                            </div>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Home & Kitchen<b
+                                class="caret"></b></a>
+                        <ul class="dropdown-menu multi-column columns-3">
+                            <div class="row">
+                                <div class="multi-gd-img">
+                                    <ul class="multi-column-dropdown">
+                                        <h6>Home & Kitchen</h6>
+                                        <li><a href="/customer/kitchenandhome/">AC/Heater</a></li>
+                                        <li><a href="/customer/kitchenandhome/">Refrigerator</a></li>
+                                        <li><a href="/customer/kitchenandhome/">Gas stove/Chimney</a></li>
+                                        <li><a href="/customer/kitchenandhome/">Washing Machine</a></li>
+                                        <li><a href="/customer/kitchenandhome/">Oven/Microwave</a></li>
+                                        <li><a href="/customer/kitchenandhome/">Other Decor Furniture</a></li>
+                                    </ul>
+                                </div>
+
+
+                            </div>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Travel & Sports<b
+                                class="caret"></b></a>
+                        <ul class="dropdown-menu multi-column columns-3">
+                            <div class="row">
+                                <div class="multi-gd-img">
+                                    <ul class="multi-column-dropdown">
+                                        <h6>Travel & Sports</h6>
+                                        <li><a href="/customer/travelandsports/">Sports Equipments</a></li>
+                                        <li><a href="/customer/travelandsports/">Yoga accessories</a></li>
+                                        <li><a href="/customer/travelandsports/">Bagpacks/Rucksacks</a></li>
+                                        <li><a href="/customer/travelandsports/">Suitcase/Trolley Bag</a></li>
+                                        <li><a href="/customer/travelandsports/">Travel accessories</a></li>
+                                        <li><a href="/customer/travelandsports/"></a></li>
+                                    </ul>
+                                </div>
+
+                            </div>
+                        </ul>
+                    </li> -->
+                    <!-- <li><a href="/customer/book/">Books</a></li> -->
+                    
+                    <li><a href="/customer/contact/">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+</div>
+
+<!-- //navigation -->

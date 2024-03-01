@@ -1,0 +1,136 @@
+{%extends 'myadmin/common/layout.html'%}
+{%block content%}
+
+<div class="pd-ltr-20 xs-pd-20-10">
+    <div class="min-height-200px">
+        <div class="page-header">
+            <div class="row">
+                <div class="col-md-6 col-sm-12">
+                    <div class="title">
+                        <h4>Form</h4>
+                    </div>
+                    <nav aria-label="breadcrumb" role="navigation">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="/seller/dashboard_admin/">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page"> Seller</li>
+                        </ol>
+                    </nav>
+                </div>
+
+            </div>
+        </div>
+        <!-- Default Basic Forms Start -->
+        <div class="pd-20 card-box mb-30">
+            <div class="clearfix">
+                <div class="pull-left">
+                    <h4 class="text-blue h4"> Seller</h4>
+                    <p class="mb-30">Edit Seller details</p>
+                </div>
+
+            </div>
+            <form method="post" action="/myadmin/update_seller_shopping/{{result.id}}" enctype="multipart/form-data">
+                {%csrf_token%}
+                <div class="form-group row">
+                    <!-- <label class="col-sm-12 col-md-2 col-form-label">Product Name</label> -->
+                    <div class="col-sm-12 col-md-10">
+                        <input class="form-control" required type="text" placeholder="First Name" name="fname"
+                            id="fname" value="{{result.user.first_name}}">
+                    </div>
+
+                </div>
+
+                <div class="form-group row">
+                    <!-- <label class="col-sm-12 col-md-2 col-form-label">Price</label> -->
+                    <div class="col-sm-12 col-md-10">
+                        <input class="form-control" type="text" required placeholder="Last Name" name="lname" id="lname"
+                            value="{{result.user.last_name}}">
+                    </div>
+
+                </div>
+
+                <div class="form-group row">
+                    <!-- <label class="col-sm-12 col-md-2 col-form-label">Price</label> -->
+                    <div class="col-sm-12 col-md-10">
+                        <input class="form-control" type="text" required placeholder="Username" name="username"
+                            id="username" value="{{result.user.username}}">
+                    </div>
+
+                </div>
+
+                <div class="form-group row">
+                    <!-- <label class="col-sm-12 col-md-2 col-form-label">Price</label> -->
+                    <div class="col-sm-12 col-md-10">
+                        <input class="form-control" type="email" required placeholder="Email" name="email" id="email"
+                            value="{{result.user.email}}">
+                    </div>
+
+                </div>
+
+                <div class="form-group row">
+                    <!-- <label class="col-sm-12 col-md-2 col-form-label">Price</label> -->
+                    <div class="col-sm-12 col-md-10">
+                        <input class="form-control" type="tel" required placeholder="Mobile Number" name="contact"
+                            id="contact" value="{{result.contact}}">
+                    </div>
+
+                </div>
+
+
+
+                <div class="form-group row">
+                    <!-- <label for="col-sm-12 col-md-2 col-form-label">Example textarea</label> -->
+                    <div class="col-sm-12 col-md-10">
+                        <textarea class="form-control" id="address" name="address" rows="2" cols="20"
+                            placeholder="Address">{{result.address}}</textarea>
+                        <!-- <input class="form-control form-control-lg" required type="text" placeholder="Address" name="address" id="address" rows="10"> -->
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <!-- <label class="col-sm-12 col-md-2 col-form-label">Price</label> -->
+                    <div class="col-sm-12 col-md-10">
+                        <input class="form-control" type="password" required placeholder="Enter password"
+                            name="password" id="password" value="{{result.password}}">
+                    </div>
+
+                </div>
+
+                <div class="form-group row">
+                    <!-- <label class="col-sm-12 col-md-2 col-form-label">Price</label> -->
+                    <div class="col-sm-12 col-md-10">
+                        <input class="form-control" type="password" required placeholder="Confirm password"
+                            name="cpassword" id="cpassword" value="{{result.cpassword}}">
+                    </div>
+
+
+                </div>
+
+
+
+
+
+
+
+
+                <button type="submit" class="btn btn-primary">Update</button>
+
+                <!-- <div class="col-sm-12 col-md-10"> -->
+                <!-- <input type="button" value="Submit" class="btn btn-primary">  -->
+                <!-- </div> -->
+
+
+        </div>
+
+        {%for message in messages%}
+        {%if message.tags == 'error'%}
+        <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script> -->
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        <script>
+            var m = "{{message}}"
+            swal("Denied!", m, "error")
+        </script>
+        {%endif%}
+        {%endfor%}
+        {%endblock%}
+    </div>
+</div>
